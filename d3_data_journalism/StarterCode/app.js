@@ -1,4 +1,3 @@
-// @TODO: YOUR CODE HERE!
 var svgWidth = 960;
 var svgHeight = 600;
 
@@ -57,7 +56,7 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYA
       .duration(1000)
       .attr("cx", d => newXScale(d[chosenXAxis])) 
       .attr("cy", d => newYScale(d[chosenYAxis]));
-    return circlesGroup;
+    return circlesGroup; 
   }
 
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
@@ -69,7 +68,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
       xlabel = "Age (Median):";
     }
     else if (chosenXAxis === "income") {
-        xlabel = "Household Income (Median)"
+        xlabel = "Household Income (Median):"
     }
     var ylabel;
     if (chosenYAxis === "healthcare") {
@@ -256,7 +255,7 @@ d3.csv("data.csv").then(function(data) {
                         .classed("inactive", true);
                     smokesLabel
                         .classed("active", false)
-                        .classed("inactive", true)
+                        .classed("inactive", true);
                 }
                 else if (chosenYAxis === "smokes") {
                     smokesLabel

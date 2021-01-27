@@ -269,7 +269,7 @@ d3.csv("data.csv").then(function(data) {
                         .classed("active", false)
                         .classed("inactive", true);                                                  
                 }
-                else if (chosenXAxis === "healthcare") {
+                else if (chosenYAxis === "healthcare") {
                     healthcareLabel
                         .classed("active", true)
                         .classed("inacive", false); 

@@ -19,20 +19,35 @@ var svg = d3
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+var chosenXAxis = "poverty";
+
+function xScale(data, chosenXAxis) {
+    var xLinearScale = d3.scaleLinear()
+        .domain([d3.min(data, d => d[chosenXaxis]) * 0.8,
+            d3.max(data, d => d[chosenXAxis]) * 1.2
+        ])
+        .range([0, width])
+    return xLinearScale
+}
+function renderAxes(newXScale, )
+
 d3.csv("data.csv").then(function(data) {
     console.log(data)
     data.forEach(function(sample) {
         sample.healthcare = +sample.healthcare;
         sample.poverty = +sample.poverty;
     });
+
     var xLinearScale = d3.scaleLinear()
     .domain([8, d3.max(data, d => d.poverty)])
     .range([0, width]);
     var yLinearScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.healthcare)])
       .range([height, 0]);
-    var bottomAxis = d3.axisBottom(xLinearScale);
+
+      var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
+
     chartGroup.append("g")
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);

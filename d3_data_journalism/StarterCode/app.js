@@ -45,10 +45,9 @@ d3.csv("data.csv").then(function(data) {
       .append("circle")
       .attr("cx", d => xLinearScale(d.poverty))
       .attr("cy", d => yLinearScale(d.healthcare))
-      .attr("r", "15")
-      .attr("label", data.abbr)
-      .attr("fill", "blue")
-      .attr("opacity", ".5");
+      .attr("r", "20")
+      .classed("stateCircle", true);
+
     var circleLabels = chartGroup.selectAll(null).data(data).enter().append("text");
 
     circleLabels
@@ -61,10 +60,25 @@ d3.csv("data.csv").then(function(data) {
         .text(function(d) {
           return d.abbr;
         })
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "10px")
-        .attr("text-anchor", "middle")
-        .attr("fill", "white");
+        .classed("stateText", true);  
+    
+    var toolTip = d3.tip()
+      .attr("class", "d3-tip")
+      .offset([80, -60])
+      .html(function(d) {
+        return (`${d.state}<br>Poverty: ${d.poverty}%<br>Healthcare: ${d.healthcare}%`);
+      });
+
+
+    chartGroup.call(toolTip);  
+    circlesGroup.on("mouseover", function(data) {
+        toolTip.show(data, this);
+      })
+        // onmouseout event
+        .on("mouseout", function(data, index) {
+          toolTip.hide(data);
+        });
+    
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 40)
@@ -73,7 +87,7 @@ d3.csv("data.csv").then(function(data) {
         .attr("class", "axisText")
         .text("Lacks Healthcare (%)");
       
-      chartGroup.append("text")
+    chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("class", "axisText")
         .text("In Poverty (%)");

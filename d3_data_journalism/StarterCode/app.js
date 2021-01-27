@@ -1,11 +1,11 @@
 // @TODO: YOUR CODE HERE!
 var svgWidth = 960;
-var svgHeight = 500;
+var svgHeight = 600;
 
 var margin = {
   top: 20,
   right: 40,
-  bottom: 80,
+  bottom: 150,
   left: 100
 };
 var width = svgWidth - margin.left - margin.right;
@@ -110,7 +110,7 @@ d3.csv("data.csv").then(function(data) {
 
     circleLabels
         .attr("x", function(d) {
-          return xLinearScale(d.poverty);
+          return xLinearScale(d[chosenXAxis]);
         })
         .attr("y", function(d) {
           return yLinearScale(d.healthcare);

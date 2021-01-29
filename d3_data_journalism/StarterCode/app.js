@@ -221,7 +221,7 @@ d3.csv("data.csv").then(function(data) {
                       .classed("active", false)
                       .classed("inactive", true);
                   }
-                  else if (chosenXAxis === "age") {
+                else if (chosenXAxis === "age") {
                     povertyLabel
                       .classed("active", false)
                       .classed("inactive", true);
@@ -231,20 +231,20 @@ d3.csv("data.csv").then(function(data) {
                     incomeLabel
                       .classed("active", false)
                       .classed("inactive", true);
-                  }
-                  else {
-                    povertyLabel
-                      .classed("active", false)
-                      .classed("inactive", true);
-                    ageLabel
-                      .classed("active", false)
-                      .classed("inactive", true);
-                    incomeLabel
-                      .classed("active", true)
-                      .classed("inactive", false);
-                  }
                 }
-              });
+                else {
+                    povertyLabel
+                      .classed("active", false)
+                      .classed("inactive", true);
+                    ageLabel
+                      .classed("active", false)
+                      .classed("inactive", true);
+                    incomeLabel
+                      .classed("active", true)
+                      .classed("inactive", false);
+                }
+            }
+        });
     labelsYGroup.selectAll("text")
         .on("click", function() {
             var value = d3.select(this).attr("value");
@@ -265,19 +265,19 @@ d3.csv("data.csv").then(function(data) {
                     smokesLabel
                       .classed("active", false)
                       .classed("inactive", true);
-                  }
-                  else if (chosenYAxis === "obesity") {
+                }
+                else if (chosenYAxis === "obesity") {
                     healthcareLabel
                       .classed("active", false)
                       .classed("inactive", true);
                     obesityLabel
                       .classed("active", true)
                       .classed("inactive", false);
-                    incomeLabel
+                    smokesLabel
                       .classed("active", false)
                       .classed("inactive", true);
-                  }
-                  else {
+                }
+                else {
                     healthcareLabel
                       .classed("active", false)
                       .classed("inactive", true);
@@ -287,9 +287,9 @@ d3.csv("data.csv").then(function(data) {
                     smokesLabel
                       .classed("active", true)
                       .classed("inactive", false);
-                  }
                 }
-              });
+            }
+        });
   }).catch(function(error) {
     console.log(error);
   });

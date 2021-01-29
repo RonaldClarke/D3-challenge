@@ -15,11 +15,12 @@ var svg = d3
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
+
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 var chosenXAxis = "poverty";
-var chosenYAxis = "healthcare"
+var chosenYAxis = "healthcare";
 
 function xScale(data, chosenXAxis) {
     var xLinearScale = d3.scaleLinear()
@@ -101,7 +102,14 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, circleLabels) {
       })
         .on("mouseout", function(data) {
           toolTip.hide(data);
-        });        
+        });      
+    circleLabels.call(toolTip);
+    circleLabels.on("mouseover", function(data) {
+        toolTip.show(data, this);
+    })
+        .on("mouseout", function(data) {
+            toolTip.hide(data);
+        });
     return circlesGroup;
 }
 
@@ -131,7 +139,7 @@ d3.csv("data.csv").then(function(data) {
         .classed("y-axis", true)
         .call(leftAxis);
 
-    var circlesGroup = chartGroup.selectAll("circle")
+    var circlesGroup = chartGroup.selectAll(".stateCircle")
       .data(data)
       .enter()
       .append("circle")
@@ -253,7 +261,7 @@ d3.csv("data.csv").then(function(data) {
                 yLinearScale = yScale(data, chosenYAxis);
                 yAxis = renderYAxes(yLinearScale, yAxis);
                 circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
-                circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+                circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, circleLabels);
                 circleLabels = renderLabels(circleLabels, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
                 if (chosenYAxis === "healthcare") {
                     healthcareLabel

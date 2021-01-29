@@ -64,7 +64,7 @@ function renderLabels(circleLabels, newXScale, chosenXAxis, newYScale, chosenYAx
         .duration(1000)
         .attr("x", d => newXScale(d[chosenXAxis])) 
         .attr("y", d => newYScale(d[chosenYAxis]));
-      return circlesLabels; 
+      return circleLabels; 
 }
 
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
